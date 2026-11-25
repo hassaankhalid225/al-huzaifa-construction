@@ -2,7 +2,7 @@
 
 A multi-page static concept website for **Al Huzaifa Building Contracting LLC**, a Dubai-based construction contractor specializing in private villas, residential and commercial buildings, MEP works, and renovations from their base in Ras Al Khor.
 
-Designed around an architectural **blueprint identity**—deep navy grid paper, cyan technical linework, and construction-amber highlights—paired with a real-time **Three.js 3D blueprint villa** that assembles itself line by line beside a tower crane.
+Designed around an architectural **blueprint identity**—deep navy grid paper, cyan technical linework and construction-amber highlights—and built around a real-time **Three.js 3D villa** that assembles itself stage by stage while an articulated tower crane lifts each element into place. On the home page the same model then follows the visitor through the five-stage process as they scroll.
 
 ---
 
@@ -17,7 +17,7 @@ Designed around an architectural **blueprint identity**—deep navy grid paper, 
 | :---: | :---: |
 | ![Services Page](screenshots/services.png) | ![Projects Page](screenshots/projects.png) |
 
-| Contact & Map | Mobile Responsive (`390×844`) |
+| Contact & Map | Mobile (`375×812`) |
 | :---: | :---: |
 | ![Contact Page](screenshots/contact.png) | ![Mobile Home](screenshots/mobile-home.png) |
 
@@ -32,15 +32,21 @@ Designed around an architectural **blueprint identity**—deep navy grid paper, 
 
 ## Key Features
 
-- **Interactive Three.js 3D Blueprint Scene (`assets/js/scene.js`)**:
-  - Built with bundled **Three.js r128** (`assets/js/vendor/three.min.js`) with zero external runtime JS dependencies.
-  - Animates a G+1 cantilevered villa assembling element-by-element from slab to roof next to an animated tower crane and swimming pool.
-  - Updates the live `Built: 0% → 100%` readout inside the hero drawing-sheet overlay.
-  - Includes a compact `data-scene="mini"` variant across inner pages and respects `prefers-reduced-motion`.
-- **Custom Technical SVG Blueprint Plates**: Hand-crafted SVG architectural elevation and MEP schematic drawings for villas, G+7 residential buildings, MEP layouts, renovations, and commercial blocks.
-- **WhatsApp-Integrated Contact Form (`assets/js/main.js`)**: Validates name, phone number, and project scope, then opens WhatsApp (`+971 50 348 9083`) pre-filled with the visitor's enquiry.
-- **Accessibility & Responsive Design**: Skip-to-content link, semantic landmarks, `aria-live` status updates, mobile drawer navigation, and fluid `clamp()` typography.
-- **Zero Build Step**: Pure HTML5, CSS3, and vanilla JavaScript—ready to open or deploy directly.
+- **Cinematic 3D hero (`assets/js/scene.js`, Three.js r128 vendored locally)**
+  - A G+1 cantilevered villa modelled in detail: structural grid with bubbles, pad footings, ground beams and starter bars, slab rebar mesh, columns and beams, walls with real window openings, a 12-riser stair, roof parapets and stair head, terrace balustrade, pool, boundary walls, dimension lines and level tags.
+  - Builds itself in ten stages (setting-out → foundations → … → glazing → external works); scaffolding goes up with the first floor and is struck at handover.
+  - An articulated tower crane (lattice mast, slewing jib, trolley, hoist cable, hook and slung load) picks each stage's load from a laydown area, slews and lowers it onto the building.
+  - MEP runs in amber: risers, ducts, conduits, drainage to a manhole, roof tank and AC units.
+  - **Blueprint ⇄ Built** render toggle (lit materials with soft shadows) and **drag to orbit** (mouse; horizontal swipe on touch). Live `Built %` readout in the drawing-sheet overlay.
+  - Hand-written post pass (line glow, vignette, grain) using a multisample `WebGLRenderTarget` + `ShaderMaterial` on capable desktops; automatically dropped, with shadows, if frame times are poor.
+- **Scroll story on the home page**: the canvas is pinned while the five process chapters scroll past, and the camera and render mode change with each one—plan view of the setting-out grid (Site visit), exploded layers (Scope and price), section A–A via a clipping plane (Approvals), MEP x-ray with scaffold (Construction) and the rendered as-built model (Handover). A HUD shows the current view and progress.
+- **Inner page headers** reuse the model in different views: rendered (About), exploded (Services), blueprint (Projects), ground-floor plan cut (Contact) and an unfinished drawing with a load hanging from the crane (404).
+- **Projects gallery**: SVG drawing plates that plot themselves when scrolled into view; hover (or the view buttons) wipes in a second sheet—section, MEP overlay, plan or steel frame—that draws itself too. Filter buttons by project type.
+- **Plotter loading screen** (first visit per session, ~1.2 s, click or any key skips, pure-CSS timing so it never blocks if JS fails) and a **blueprint wipe page transition** between pages.
+- **WhatsApp-integrated contact form (`assets/js/main.js`)**: validates name, phone number and project scope, then opens WhatsApp (`+971 50 348 9083`) pre-filled with the visitor's enquiry.
+- **Performance & resilience**: rendering pauses when the canvas is off-screen or the tab is hidden; device pixel ratio capped at 2 (1.5 on phones); phones get a lighter model with no shadows or post-processing. Without WebGL the pages show an SVG fallback drawing and a static process board.
+- **Accessibility**: skip link, semantic landmarks, `aria-pressed` toggles, `aria-live` form status, visible amber focus rings, full-screen mobile menu (Escape closes). `prefers-reduced-motion` turns off the loader, transitions, auto-motion and scroll-driven camera, leaving a static finished frame.
+- **Zero build step**: plain HTML, CSS and vanilla JavaScript.
 
 ---
 
@@ -48,10 +54,10 @@ Designed around an architectural **blueprint identity**—deep navy grid paper, 
 
 | File | Page | Highlights |
 | :--- | :--- | :--- |
-| `index.html` | **Home** | 3D blueprint assembly hero, contractor workflow (5 stages), service overview, recent drawing plates, CTA |
-| `about.html` | **About** | Site-engineer-led delivery model, transparent BOQ pricing, weekly photo reporting, clean handover standards |
-| `services.html` | **Services** | Detailed breakdowns for Villa Construction, Building Construction, MEP Works, and Renovation & Extension |
-| `projects.html` | **Projects** | Architectural SVG blueprint plates across G+1 villas, G+2 MEP layouts, G+7 residential, extensions, and commercial blocks |
+| `index.html` | **Home** | 3D build hero with crane, scroll-driven 5-stage process story, service overview, recent drawing plates, CTA |
+| `about.html` | **About** | Rendered model header, profile, one-site-engineer diagram, four working standards |
+| `services.html` | **Services** | Exploded-model header, sticky section nav, four service sheets with self-drawing plates |
+| `projects.html` | **Projects** | Filterable gallery of two-sheet drawing plates: G+1 villa, G+2 MEP layout, G+7 residential, extension, showroom |
 | `contact.html` | **Contact** | Ras Al Khor office info, phone/WhatsApp links, validated enquiry form, embedded Google Map |
 | `404.html` | **Not Found** | Custom blueprint-styled 404 page (`This drawing is missing.`) |
 
@@ -59,7 +65,7 @@ Designed around an architectural **blueprint identity**—deep navy grid paper, 
 
 ## Design System & Typography
 
-- **Fonts**: `Archivo` (variable width & weight for architectural display headings) and `IBM Plex Sans` (body copy) via Google Fonts.
+- **Fonts**: `Archivo` (variable width & weight for display headings), `IBM Plex Sans` (body copy) and `IBM Plex Mono` (drawing labels, title blocks) via Google Fonts.
 - **Color Tokens** (`assets/css/style.css`):
   - Blueprint Ink (Background): `#071B33`
   - Structural Blue: `#0E3A6B`
