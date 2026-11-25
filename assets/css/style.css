@@ -83,6 +83,7 @@ html.arrive body::after{content:"";position:fixed;inset:0;z-index:240;pointer-ev
 
 /* ---------- header ---------- */
 .hdr{position:fixed;inset:0 0 auto;z-index:60;padding-top:env(safe-area-inset-top,0px);transition:background .35s,border-color .35s,backdrop-filter .35s;border-bottom:1px solid transparent}
+.hdr:not(.is-scrolled){background:linear-gradient(180deg,rgba(7,27,51,.82) 0%,rgba(7,27,51,.5) 60%,rgba(7,27,51,0) 100%)}
 .hdr.is-scrolled{background:rgba(7,27,51,.86);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-color:var(--hair)}
 .hdr .wrap{display:flex;align-items:center;justify-content:space-between;height:var(--hdr);gap:20px}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;flex:none}
